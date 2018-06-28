@@ -23,7 +23,6 @@
     
     <cfif listLen(loginErrList) eq 0>
         <cfset session.user = "#form.loginUser#">
-        <cfdump var="#session.user#" abort>
         <cflocation url="/src/pages/AddBlog.cfm">
     </cfif>
 </cfif>
