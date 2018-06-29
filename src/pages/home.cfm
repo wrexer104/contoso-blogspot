@@ -6,7 +6,11 @@
 <cfset loginErrList = "">
 <cfset oLogin = createobject("component", "src.components.login") />
 <cfset oRegistration = createobject("component", "src.components.registration") />
- 
+
+<cfif trim(len(session.user)) neq 0>
+    <cfset session.user = ''>
+</cfif>
+
 <cfif isDefined("btnRegister")>
     <cfset regErrList = oRegistration.getErrorList(form)>
     
@@ -116,8 +120,8 @@
         
         
         <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'registration-container')" id="defaultOpen">Register (new user)</button>
-            <button class="tablinks" onclick="openCity(event, 'login-container')">Login (existing user)</button>
+            <button class="tablinks" onclick="showDiv(event, 'registration-container')" id="defaultOpen">Register (new user)</button>
+            <button class="tablinks" onclick="showDiv(event, 'login-container')">Login (existing user)</button>
         </div>
         
         <div id="registration-container" class="tabcontent">
@@ -202,7 +206,7 @@
 
     
     <script type="text/javascript">
-        function openCity(evt, cityName) {
+        function showDiv(evt, divName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
@@ -212,7 +216,7 @@
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-            document.getElementById(cityName).style.display = "block";
+            document.getElementById(divName).style.display = "block";
             evt.currentTarget.className += " active";
         }
         
