@@ -93,12 +93,12 @@
             }
             
             table#table-register {
-                padding: 60px 220px;
+                padding: 45px 0px 0px 210px;
                 border-collapse: inherit;
             }
 
             table#table-login {
-                padding: 60px 220px;
+                padding: 45px 0px 0px 210px;
                 border-collapse: inherit;
             }
 
