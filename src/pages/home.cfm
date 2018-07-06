@@ -34,81 +34,86 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <style type="text/css">
-            /* * {box-sizing: border-box} */
-            /* body {font-family: "Lato", sans-serif;} */
-        
-            /* Style the tab */
-            .tab {
-                float: left;
-                border: 1px solid #ccc;
-                background-color: #f1f1f1;
-                width: 30%;
-                height: 300px;
-            }
-        
-            /* Style the buttons inside the tab */
-            .tab button {
-                display: block;
-                background-color: inherit;
-                color: black;
-                padding: 22px 16px;
-                width: 100%;
-                border: none;
-                outline: none;
-                text-align: left;
-                cursor: pointer;
-                transition: 0.3s;
-                font-size: 17px;
-            }
-        
-            /* Change background color of buttons on hover */
-            .tab button:hover {
-                background-color: #ddd;
-            }
-        
-            /* Create an active/current "tab button" class */
-            .tab button.active {
-                background-color: #ccc;
-            }
-        
-            /* Style the tab content */
-            .tabcontent {
-                padding: 0px 20px;
-                border: 1px solid #ccc;
-                width: 100%;
-                border-left: none;
-                height: 300px;
-            }
+    <style type="text/css">
+        /* * {box-sizing: border-box} */
+        /* body {font-family: "Lato", sans-serif;} */
+    
+        /* Style the tab */
+        .tab {
+            float: left;
+            border: 1px solid #ccc;
+            /* background-color: #f1f1f1; */
+            width: 30%;
+            height: 300px;
+            background-color: aliceblue;
+        }
+    
+        /* Style the buttons inside the tab */
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+    
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+    
+        /* Create an active/current "tab button" class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+    
+        /* Style the tab content */
+        .tabcontent {
+            padding: 0px 20px;
+            border: 1px solid #ccc;
+            width: 100%;
+            border-left: none;
+            height: 300px;
+        }
 
-            .error {
-                color: red;
-            }
-            
-            table#table-register {
-                padding: 45px 0px 0px 210px;
-                border-collapse: inherit;
-            }
-
-            table#table-login {
-                padding: 45px 0px 0px 210px;
-                border-collapse: inherit;
-            }
-
-            #table-register tr td .table-header,#table-login tr td .table-header {
-                text-decoration: underline;
-                font-weight: bold;
-                padding: 2px;
-            }
+        .error {
+            color: red;
+        }
         
-            </style>
+        table#table-register {
+            padding: 45px 0px 0px 210px;
+            border-collapse: inherit;
+        }
+
+        table#table-login {
+            padding: 45px 0px 0px 210px;
+            border-collapse: inherit;
+        }
+
+        #table-register tr td .table-header,#table-login tr td .table-header {
+            text-decoration: underline;
+            font-weight: bold;
+            padding: 2px;
+        }
+
+        #login-container, #registration-container {
+            background-color: antiquewhite;
+        }
+    
+        </style>
 </head>
 
 <body>
@@ -200,8 +205,9 @@
                     </cfloop>
                 </ul>
             </cfif>
-
         </div>
+
+        <cfinclude template="/src/pages/footerinfo.cfm">
     </div>
 
     
