@@ -18,37 +18,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--- style sheets --->
+    <link rel="stylesheet" type="text/css" href="/src/styles/blogs.css">
 
-    <style type="text/css">
-        input, textarea {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: normal;    
-        }
-
-        body {
-            background-color: beige;
-        }
-
-        h1 {
-            padding-top: 15px;
-        }
-        table#blog-table td {
-            font-weight: bold;
-        }
-
-        .posting-notifications {
-            padding: 20px 0px 20px 180px;
-        }
-        
-        .error {
-            color: red;
-        }
-
-        .view-more-blogs {
-            padding: 30px 0px;
-            font-weight: normal;
-        }
-    </style>
 </head>
 
 <body>

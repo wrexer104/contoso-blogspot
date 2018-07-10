@@ -12,7 +12,7 @@
         </cfif>
         
         <cfif len(trim(loginUser)) NEQ 0>
-            <cfquery name="validateUsername" datasource="cfBlogspot">
+            <cfquery name="validateUsername" >
                 SELECT * FROM dbo.[User] where username = <cfqueryparam cfsqltype="cf_sql_varchar" value="#form.loginUser#">
             </cfquery>
 
@@ -21,7 +21,7 @@
             </cfif>
         </cfif>
         
-        <cfquery name="getPasswordSalt" datasource="cfBlogspot">
+        <cfquery name="getPasswordSalt">
             SELECT passwordhash, salt FROM dbo.[User] where username = <cfqueryparam cfsqltype="cf_sql_varchar" value="#form.loginPwd#">
         </cfquery>
 

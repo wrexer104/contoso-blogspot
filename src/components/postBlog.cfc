@@ -21,7 +21,7 @@
 
         <cfset loggedInUser = #session.user#>
 
-        <cfquery name="getUserId" datasource="cfBlogspot">
+        <cfquery name="getUserId">
             SELECT id FROM dbo.[User] WHERE username = <cfqueryparam cfsqltype="cf_sql_varchar" value="#session.user#">
         </cfquery>
 

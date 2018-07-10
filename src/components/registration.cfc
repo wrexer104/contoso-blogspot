@@ -28,7 +28,7 @@
     <cffunction name="validateRegistration" access="public" output="false" returntype="boolean">
         <cfargument name="form" type="struct" required="true">
     
-        <cfquery name="checkRegisteredEmail" datasource="cfBlogspot">
+        <cfquery name="checkRegisteredEmail">
             select * from dbo.[User] where email = <cfqueryparam cfsqltype="cf_sql_varchar" value="#form.userEmail#">
         </cfquery>
 
