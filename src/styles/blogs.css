@@ -29,9 +29,8 @@ table#blog-table td {
 
 body {
     background-color: beige;
-    margin-left: 350px;
-    margin-right: 350px;
 }
+
 .new-blog-link {
     padding: 20px 0px 0px 50px;
     font-weight: normal;
