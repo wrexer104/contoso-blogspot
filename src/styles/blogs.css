@@ -1,0 +1,68 @@
+input, textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;    
+}
+
+body {
+    background-color: beige;
+}
+
+h1 {
+    padding-top: 15px;
+}
+table#blog-table td {
+    font-weight: bold;
+}
+
+.posting-notifications {
+    padding: 20px 0px 20px 180px;
+}
+
+.error {
+    color: red;
+}
+
+.view-more-blogs {
+    padding: 30px 0px;
+    font-weight: normal;
+}
+
+body {
+    background-color: beige;
+}
+
+.new-blog-link {
+    padding: 20px 0px 0px 50px;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+#blog-list-container {
+    padding: 50px 0px 50px 50px;
+    resize: both;
+    overflow: auto;
+}
+
+.date-header {
+    font-weight: bold;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.blog-owner {
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.blog-title {
+    font-size: 1.5em;
+    text-decoration: underline;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.blog-content {
+    padding-top: 5px;
+    font-size: 1.2em;
+    text-align: justify;
+    text-justify: inter-word;
+}
