@@ -66,7 +66,7 @@
                         <td></td>
                         <td>
                             <div class="view-more-blogs">
-                                <i>Click <a href="/src/pages/listBlogs.cfm">here</a> to view more blogs by other members.</i>
+                                <i>Click <a href="/src/pages/listBlogs.cfm?page=1">here</a> to view more blogs by other members.</i>
                             </div>
                         </td>
                     </tr>
