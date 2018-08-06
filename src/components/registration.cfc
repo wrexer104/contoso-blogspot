@@ -49,8 +49,7 @@
                 )
             </cfquery>
         </cfif>
-            <cfreturn 1>
+        <cfreturn 1>
     </cffunction>
-
 
 </cfcomponent>

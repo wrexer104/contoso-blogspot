@@ -38,7 +38,7 @@ body {
 }
 
 #blog-list-container {
-    padding: 50px 0px 50px 50px;
+    padding: 50px 50px 50px 50px;
     resize: both;
     overflow: auto;
 }
@@ -69,4 +69,10 @@ body {
 
 .disabled-text {
     color: #D3D3D3;
+}
+
+#HCB_comment_box {
+    padding: 50px 350px 50px 50px;
+    resize: both;
+    overflow: auto;
 }

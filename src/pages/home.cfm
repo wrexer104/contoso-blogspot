@@ -2,33 +2,11 @@
 <cfparam name="userRegistered" default = 0>
 <cfparam name="existingUser" default = 0>
 <cfparam name="loginSuccess" default = 0>
-<cfset regErrList = "">
-<cfset loginErrList = "">
-<cfset oLogin = createobject("component", "src.components.login") />
-<cfset oRegistration = createobject("component", "src.components.registration") />
+<cfparam name="regErrList" default = "">
+<cfparam name="loginErrList" default = "">
 
 <cfif trim(len(session.user)) neq 0>
     <cfset session.user = ''>
-</cfif>
-
-<cfif isDefined("btnRegister")>
-    <cfset regErrList = oRegistration.getErrorList(form)>
-    
-    <cfif listLen(regErrList) eq 0>
-        <cfset userRegistered = oRegistration.validateRegistration(form)>
-        <cfif NOT userRegistered>
-            <cfset existingUser = 1>
-        </cfif>
-    </cfif>
-</cfif>
-
-<cfif isDefined("btnLogin")>
-    <cfset loginErrList = oLogin.getLoginErrors(form)>
-    
-    <cfif listLen(loginErrList) eq 0>
-        <cfset session.user = "#form.loginUser#">
-        <cflocation url="/src/pages/AddBlog.cfm">
-    </cfif>
 </cfif>
 
 <!DOCTYPE html>
@@ -59,7 +37,7 @@
         </div>
         
         <div id="registration-container" class="tabcontent">
-            <form name="registerUser" id="registerUser" action="/src/pages/home.cfm" method="post">
+            <form name="registerUser" id="registerUser" action="/src/actions/register_action.cfm" method="post">
                 <table id="table-register">
                     <tr><td style="text-decoration: underline; font-weight: bold; padding-bottom: 5px">Register a new user</td></tr>
                     <tr>
@@ -88,7 +66,7 @@
         </div>
         
         <div id="login-container" class="tabcontent">
-            <form name="loginForm" id="loginForm" action="/src/pages/home.cfm" method="post">
+            <form name="loginForm" id="loginForm" action="/src/actions/login_action.cfm" method="post">
                 <table id="table-login">
                     <tr><td style="text-decoration: underline; font-weight: bold; padding-bottom: 5px">Login</td></tr>
                     <tr>
@@ -117,10 +95,10 @@
                     </cfloop>
                 </ul>
             </cfif>
-
             <cfif userRegistered eq 1>
                 <span>User registered successfully!</span>
             </cfif>
+            
             <cfif existingUser eq 1>
                 <span>This user already exists. Please proceed to login.</span>
             </cfif>
