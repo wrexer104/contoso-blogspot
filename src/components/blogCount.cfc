@@ -5,10 +5,10 @@
         <cfset count = 0 />
 
         <cfquery name="getTotalBlogs">
-            select * from dbo.[Blog] ORDER BY blogCreatedDate;
+            select count(*) as blogCount from dbo.[Blog];
         </cfquery>
 
-        <cfset count = getTotalBlogs.recordcount />
+        <cfset count = getTotalBlogs.blogCount />
 
         <cfreturn count />
     </cffunction>
