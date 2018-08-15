@@ -11,20 +11,18 @@
 
 <cfset pageSize = 5 />
 
-<cfif isDefined("search")>
-    <cfif len(trim(inputData))>
-        <cfset formSearchValue = form.inputData>
-        <cfquery name="listBlogPages">
-            SELECT username, blogTitle, blogContent, blogCreatedDate FROM dbo.Blog INNER JOIN dbo.[User] 
-            ON dbo.[User].id = dbo.Blog.userId WHERE blogTitle like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
-            or blogContent like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
-            or username like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
-            ORDER BY [blogCreatedDate] DESC
-            -- OFFSET #pageSize# * (#pageNumber# - 1) ROWS
-            -- FETCH NEXT #pageSize# ROWS ONLY;
-        </cfquery>
-        <cfset searchCount = listBlogPages.recordCount>
-    </cfif>
+<cfif isDefined("search") AND len(trim(form.inputData)) GT 0>
+    <cfset formSearchValue = form.inputData>
+    <cfquery name="listBlogPages">
+        SELECT username, blogTitle, blogContent, blogCreatedDate FROM dbo.Blog INNER JOIN dbo.[User] 
+        ON dbo.[User].id = dbo.Blog.userId WHERE blogTitle like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
+        or blogContent like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
+        or username like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
+        ORDER BY [blogCreatedDate] DESC
+        -- OFFSET #pageSize# * (#pageNumber# - 1) ROWS
+        -- FETCH NEXT #pageSize# ROWS ONLY;
+    </cfquery>
+    <cfset searchCount = listBlogPages.recordCount>
 <cfelse>
     <cfset formSearchValue = "">
     <cfquery name="listBlogPages">
@@ -45,6 +43,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--- style sheets --->
@@ -59,12 +59,12 @@
         Click <a href="/src/pages/addBlog.cfm">here</a> to add a new blog.
     </div>
 
-    <div align="right">
+    <div align="right" style="padding-right: 10px">
         <cfoutput>
-            <form name="searchBlogs" id="searchBlogs" method="post" action="/src/pages/listBlogs.cfm?page=#pageNumber#&search=#pageNumber#">
+            <form name="searchBlogs" id="searchBlogs" method="post" action="/src/pages/listBlogs.cfm?page=#pageNumber#">
                 <input type="text" name="inputData" id="inputData" value="#formSearchValue#"/>
-                <input type="submit" name="search" value="Search" /><br>
-                <a style="margin-right: 156px;" align="left" href="/src/pages/listBlogs.cfm?page=#pageNumber#">Reset search</a>
+                <button type="submit" name="search" /><i class="fa fa-search"></i></button><br>
+                <a style="margin-right: 125px;" align="left" href="/src/pages/listBlogs.cfm?page=#pageNumber#">Reset search</a>
             </cfoutput>
         </form>
     </div>
@@ -77,7 +77,7 @@
             <cfoutput>
                 <p>
                     <h3 class="date-header">#dateFormat(listBlogPages.blogCreatedDate, "ddd, mmmm dd, yyyy")#</h3><span class="blog-owner"> <i>By #listBlogPages.username#</i><br/></span>
-                    <span><a href="/src/pages/displayBlog.cfm?blogId=#blogNumber#" class="blog-title"><cfif not structKeyExists(url,'search')>#blogNumber#. </cfif>#listBlogPages.blogTitle#</a></span>
+                    <span><a href="/src/pages/displayBlog.cfm?blogId=#blogNumber#" class="blog-title"><cfif formSearchValue EQ ''>#blogNumber#. </cfif>#listBlogPages.blogTitle#</a></span>
                     <cfset counter = counter - 1 />
                 </p><br><br>
             </cfoutput>
