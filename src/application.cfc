@@ -4,10 +4,10 @@ component {
     this.name = "myBlogApp";
     this.sessionManagement = true;
     this.datasource = "cfBlogspot";
-    this.sessionTimeout = createTimespan(0,0,30,0);
+    this.applicationTimeout = createTimespan(0,0,15,0);
+    this.sessionTimeout = createTimespan(0,0,15,0);
         
     function onSessionStart() {
         session.user = '';
-        
     }
 }

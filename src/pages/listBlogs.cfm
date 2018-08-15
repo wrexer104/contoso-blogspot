@@ -1,37 +1,41 @@
 <cfparam name = "pageNumber" default = "1" />
-<!--- <cfset blogId=url.blogId />
+<cfparam name="formSearchValue" default="" />
+<cfset searchCount = 0>
 
-<cfquery name="getSingleBlog">
-    SELECT
-    *
-    FROM
-        (
-            SELECT
-                ROW_NUMBER () OVER (ORDER BY blogCreatedDate DESC) AS RowNum,
-                *
-            FROM
-                dbo.[Blog]
-        ) sub
-    WHERE
-        RowNum = #blogId#;
-
-</cfquery> --->
 <cfif structKeyExists(url, "page")>
     <cfset pageNumber = url.page />
 </cfif>
 
-<cfset oBlogCount = createobject("component", "src.components.blogCount") />
-<cfset blogCount = oBlogCount.getTotalBlogCount() />
+<cfset oBlog = createobject("component", "src.components.blog") />
+<cfset oSearch = createobject("component", "src.components.search") />
+<cfset blogCount = oBlog.getTotalBlogCount() />
 
 <cfset pageSize = 5 />
 
-<cfquery name="listBlogPages">
-    SELECT u.username, b.blogTitle, b.blogContent, b.blogCreatedDate
-    FROM dbo.[User] u FULL OUTER JOIN dbo.[Blog] b ON u.id = b.userId 
-    ORDER BY [blogCreatedDate] DESC
-    OFFSET #pageSize# * (#pageNumber# - 1) ROWS
-    FETCH NEXT #pageSize# ROWS ONLY;
-</cfquery>
+<cfif isDefined("search")>
+    <cfif len(trim(inputData))>
+        <cfset formSearchValue = form.inputData>
+        <cfquery name="listBlogPages">
+            SELECT username, blogTitle, blogContent, blogCreatedDate FROM dbo.Blog INNER JOIN dbo.[User] 
+            ON dbo.[User].id = dbo.Blog.userId WHERE blogTitle like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
+            or blogContent like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
+            or username like <cfqueryparam cfsqltype="cf_sql_varchar" value="%#form.inputData#%">
+            ORDER BY [blogCreatedDate] DESC
+            -- OFFSET #pageSize# * (#pageNumber# - 1) ROWS
+            -- FETCH NEXT #pageSize# ROWS ONLY;
+        </cfquery>
+        <cfset searchCount = listBlogPages.recordCount>
+    </cfif>
+<cfelse>
+    <cfset formSearchValue = "">
+    <cfquery name="listBlogPages">
+        SELECT u.username, b.blogTitle, b.blogContent, b.blogCreatedDate
+        FROM dbo.[User] u FULL OUTER JOIN dbo.[Blog] b ON u.id = b.userId 
+        ORDER BY [blogCreatedDate] DESC
+        OFFSET #pageSize# * (#pageNumber# - 1) ROWS
+        FETCH NEXT #pageSize# ROWS ONLY;
+    </cfquery>
+</cfif>
 
 <cfquery name="getTotalBlogs">
     select * from dbo.[Blog] ORDER BY blogCreatedDate;
@@ -55,15 +59,26 @@
     <div class="new-blog-link">
         Click <a href="/src/pages/addBlog.cfm">here</a> to add a new blog.
     </div>
+
+    <div align="right">
+        <cfoutput>
+            <form name="searchBlogs" id="searchBlogs" method="post" action="/src/pages/listBlogs.cfm?page=#pageNumber#&search=#pageNumber#">
+                <input type="text" name="inputData" id="inputData" value="#formSearchValue#"/>
+                <input type="submit" name="search" value="Search" /><br>
+                <a style="margin-right: 156px;" align="left" href="/src/pages/listBlogs.cfm?page=#pageNumber#">Reset search</a>
+            </cfoutput>
+        </form>
+    </div>
+
     <div width="1200px" align="left" id="blog-list-container">
         <cfset counter = pageSize - 1 />
-        
+                
         <cfloop query="listBlogPages">
+            <cfset blogNumber = pagesize * pageNumber - counter />
             <cfoutput>
                 <p>
-                    <cfset blogNumber = pagesize * pageNumber - counter />
                     <h3 class="date-header">#dateFormat(listBlogPages.blogCreatedDate, "ddd, mmmm dd, yyyy")#</h3><span class="blog-owner"> <i>By #listBlogPages.username#</i><br/></span>
-                    <span><a href="/src/pages/displayBlog.cfm?blogId=#blogNumber#" class="blog-title">#blogNumber#. #listBlogPages.blogTitle#</a></span>
+                    <span><a href="/src/pages/displayBlog.cfm?blogId=#blogNumber#" class="blog-title"><cfif not structKeyExists(url,'search')>#blogNumber#. </cfif>#listBlogPages.blogTitle#</a></span>
                     <cfset counter = counter - 1 />
                 </p><br><br>
             </cfoutput>
@@ -77,8 +92,15 @@
             </cfoutput>
 
             <cfoutput>
-                <cfloop from="1" to="#blogCount#" index="i">
-                    <li class="page-item"><a class="page-link page-number" href="/src/pages/listBlogs.cfm?page=#i#" >#i#</a></li>
+                <cfset pages = blogCount / pageSize + 1>
+                <cfset searchpages = searchCount / pageSize + 1 >
+                <cfif searchpages gt 1>
+                    <cfset searchTill = searchpages>
+                <cfelse>
+                    <cfset searchTill = pages>
+                </cfif>
+                <cfloop from="1" to="#searchTill#" index="i">
+                    <li class="page-item"><a class="page-link page-number" href="/src/pages/listBlogs.cfm?page=#i#">#i#</a></li>
                 </cfloop>
             </cfoutput>
             <cfoutput>

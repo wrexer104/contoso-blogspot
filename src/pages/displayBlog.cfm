@@ -16,7 +16,7 @@
 
 </cfquery>
 
-<cfset oBlogCount = createobject("component", "src.components.blogCount") />
+<cfset oBlogCount = createobject("component", "src.components.blog") />
 <cfset blogCount = oBlogCount.getTotalBlogCount() />
 
 <cfquery name="getBlogDetail">
