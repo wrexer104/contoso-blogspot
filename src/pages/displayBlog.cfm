@@ -16,7 +16,7 @@
 
 </cfquery>
 
-<cfset oBlogCount = createobject("component", "src.components.blogCount") />
+<cfset oBlogCount = createobject("component", "src.components.blog") />
 <cfset blogCount = oBlogCount.getTotalBlogCount() />
 
 <cfquery name="getBlogDetail">
@@ -60,14 +60,11 @@
         </cfloop>
     </div>
     
-    <div id="HCB_comment_box" width="1200px"><a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
-        
-    </div>
-
-        <p class="new-blog-link">
-            Click <a href="/src/pages/listBlogs.cfm">here</a> to go back to the blog list page.
-        </p>
-
+    <div id="HCB_comment_box" width="1200px">Loading comments...</div>
+    
+    <p class="new-blog-link">
+        Click <a href="/src/pages/listBlogs.cfm">here</a> to go back to the blog list page.
+    </p>
 
     <nav align="center">
         <ul class="pagination">
@@ -95,8 +92,14 @@
             
 </script>
 
-<script type="text/javascript" id="hcb"> 
-    /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="//www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10&ts=1533587575091");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ 
+    <script type="text/javascript" id="hcb"> 
+    /*<!--*/ if(!window.hcb_user){hcb_user={};} (function() { 
+        var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="//www.htmlcommentbox.com";
+        s.setAttribute("type","text/javascript");
+        s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10&ts=1533587575091");
+        if (typeof s!="undefined") 
+            document.getElementsByTagName("head")[0].appendChild(s);
+        })(); /*-->*/ 
     </script>
 </html>
 

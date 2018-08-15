@@ -1,6 +1,6 @@
 <cfparam name="blogSaved" default = 0>
 <cfset blogPostingErrors = "">
-<cfset oBlog = createobject("component", "src.components.postBlog") />
+<cfset oBlog = createobject("component", "src.components.blog") />
 
 <cfif isDefined("postBlog")>
     <cfset blogPostingErrors = oBlog.getBlogPostingErrorList(form)>
