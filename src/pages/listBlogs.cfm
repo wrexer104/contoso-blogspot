@@ -7,7 +7,6 @@
 </cfif>
 
 <cfset oBlog = createobject("component", "src.components.blog") />
-<cfset oSearch = createobject("component", "src.components.search") />
 <cfset blogCount = oBlog.getTotalBlogCount() />
 
 <cfset pageSize = 5 />
