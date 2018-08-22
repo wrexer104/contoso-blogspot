@@ -63,7 +63,7 @@
         <cfoutput>
             <form name="searchBlogs" id="searchBlogs" method="post" action="/src/pages/listBlogs.cfm?page=#pageNumber#">
                 <input type="text" name="inputData" id="inputData" value="#formSearchValue#"/>
-                <button type="submit" name="search" /><i class="fa fa-search"></i></button><br>
+                <button type="submit" name="search" style="padding: 4px 6px 4px 6px;"/><i class="fa fa-search"></i></button><br>
                 <a style="margin-right: 125px;" align="left" href="/src/pages/listBlogs.cfm?page=#pageNumber#">Reset search</a>
             </cfoutput>
         </form>
